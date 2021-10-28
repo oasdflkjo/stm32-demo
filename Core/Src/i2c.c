@@ -114,6 +114,41 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+int8_t BME_I2C_Read(uint8_t reg_addr, uint8_t *reg_data,
+		uint32_t len, void *intf_ptr)
+{
+	uint16_t device_addr = ((*(uint16_t*) bme280_device.intf_ptr) << 1);
+
+	if (HAL_I2C_Mem_Read(&hi2c1, (uint8_t) device_addr, (uint8_t) reg_addr, 1,
+			reg_data, len, 500) == HAL_OK)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+int8_t BME_I2C_Write(uint8_t reg_addr, const uint8_t *reg_data,
+		uint32_t len, void *intf_ptr)
+{
+	uint16_t device_addr = ((*(uint16_t*) bme280_device.intf_ptr) << 1);
+
+	if (HAL_I2C_Mem_Write(&hi2c1, device_addr, reg_addr, 1, (uint8_t*) reg_data,
+			len, 500) == HAL_OK)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+
+
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

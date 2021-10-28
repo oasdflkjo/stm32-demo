@@ -8,6 +8,11 @@
 #ifndef INC_DATA_STORAGE_H_
 #define INC_DATA_STORAGE_H_
 
+#include <stdint.h>
+
+
+uint8_t* GetRXBuffer();
+
 void DataStorage_Init();
 
 void DataStorage_Write();

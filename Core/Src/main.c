@@ -93,12 +93,17 @@ int main(void)
 
   App_Init();
 
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+    App_Task();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

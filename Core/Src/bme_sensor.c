@@ -6,84 +6,75 @@
  */
 
 #include "bme_sensor.h"
-
-#include <stdint.h>
+#include "i2c.h"
 
 #include <bme280/bme280.h>
 
-#define BME_DELAY(MS, X) \
-		HAL_Delay(MS)
+#include <stdint.h>
 
-struct bme280_dev g_device;
-
-static int8_t BME_I2C_Reg_Write(uint8_t reg_addr, const uint8_t *reg_data,
-		uint32_t len, void *intf_ptr);
-
-static int8_t BME_I2C_Reg_Read(uint8_t reg_addr, uint8_t *reg_data,
-		uint32_t len, void *intf_ptr);
+#define MS_TO_US_DIV	1000
+#define DEVICE_ADDR		BME280_I2C_ADDR_PRIM
 
 
 
-static struct bme280_dev* configure_device(struct bme280_dev*);
+struct bme280_dev bme280_device = { 0 };
 
-
-static struct bme280_dev* configure_device(struct bme280_dev* device)
+static void Delay_Ms(uint32_t period, void* intf_ptr)
 {
-	device->read = BME_I2C_Reg_Read;
-	device->write = BME_I2C_Reg_Write;
-
-	// typedef void (*bme280_delay_us_fptr_t)(uint32_t period, void *intf_ptr);
-	// bme280_delay_us_fptr_t delay_us;
-	// HAL_Delay for now?
-	//	device->delay_us = BME_DELAY;
+	HAL_Delay(period / MS_TO_US_DIV);
 }
 
-int bme_init()
+static void Configure_Device(struct bme280_dev* device)
 {
-	int8_t result;
+	device->read = BME_I2C_Read;
+	device->write = BME_I2C_Write;
 
-	result = bme280_init(&g_device);
+	device->delay_us = Delay_Ms;
 
-	return (int) result;
+	device->intf_ptr = DEVICE_ADDR;
+	device->intf = BME280_I2C_INTF;
 }
 
-struct bme280_dev* get_bme280_device()
+static int8_t Set_Device_Operational(struct bme280_dev* device)
 {
-	return &g_device;
+	int8_t rslt;
+	uint8_t settings;
+//	struct bme280_data
+
+
+	device->settings.osr_h = BME280_OVERSAMPLING_1X;
+	device->settings.osr_p = BME280_OVERSAMPLING_16X;
+	device->settings.osr_t = BME280_OVERSAMPLING_2X;
+
+	device->settings.standby_time = BME280_STANDBY_TIME_62_5_MS;
+
+	settings = BME280_OSR_PRESS_SEL | BME280_OSR_TEMP_SEL | BME280_OSR_HUM_SEL
+			| BME280_STANDBY_SEL | BME280_FILTER_SEL;
+
+	rslt = bme280_set_sensor_settings(settings, device);
+
+	// request delay?
 }
 
-// TODO Does these I2C functions belong here? Or is there usage out somewhere else for these? Tho they are implemented just for BME280 drivers.
-
-static int8_t BME_I2C_Reg_Read(uint8_t reg_addr, uint8_t *reg_data,
-		uint32_t len, void *intf_ptr)
+struct bme280_dev* Get_BME280_Device()
 {
-	uint16_t device_addr;
-	device_addr = ((*(uint16_t*) g_device.intf_ptr) << 1);
-
-	if (HAL_I2C_Mem_Read(&hi2c1, (uint8_t) device_addr, (uint8_t) reg_addr, 1,
-			reg_data, len, 500) == HAL_OK)
-	{
-		return 0;
-	}
-	else
-	{
-		return -1;
-	}
+	return &bme280_device;
 }
 
-static int8_t BME_I2C_Reg_Write(uint8_t reg_addr, const uint8_t *reg_data,
-		uint32_t len, void *intf_ptr)
+int BME_GetData(struct bme280_data* data)
 {
-	uint16_t device_addr = ((*(uint16_t*) g_device.intf_ptr) << 1);
 
-	if (HAL_I2C_Mem_Write(&hi2c1, device_addr, reg_addr, 1, (uint8_t*) reg_data,
-			len, 500) == HAL_OK)
-	{
-		return 0;
-	}
-	else
-	{
-		return -1;
-	}
+}
+
+
+int BME_Init()
+{
+	int8_t result = 0;
+
+	Configure_Device(&bme280_device);
+
+	result = bme280_init(&bme280_device);
+
+	return result;
 }
 

@@ -9,13 +9,18 @@
 #define INC_APP_H_
 
 
-
+/**
+ * @brief
+ *
+ */
 void App_Init();
 
-
-
-// ?
-int App_Run();
+/**
+ * @brief
+ *
+ * @return int
+ */
+int App_Task();
 
 
 #endif /* INC_APP_H_ */

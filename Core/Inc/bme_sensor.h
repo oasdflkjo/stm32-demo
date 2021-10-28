@@ -8,17 +8,13 @@
 #ifndef INC_BME_SENSOR_H_
 #define INC_BME_SENSOR_H_
 
+#include <bme280/bme280_defs.h>
 
-// TODO Naming gooood?
-enum bme_sensor_state {
-	BME_INIT_SUCCESS,
-	BME_INIT_WARNING,
-	BME_INIT_FAILED,
-};
+extern struct bme280_dev bme280_device;
 
-int bme_init();
+int BME_Init();
 
-struct bme280_dev* get_bme280_device();
+int BME_GetData(struct bme280_data* data);
 
 
 #endif /* INC_BME_SENSOR_H_ */

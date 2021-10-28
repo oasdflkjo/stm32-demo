@@ -34,6 +34,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 
 #include "app.h"
+#include "data_storage.h"
 
 /* USER CODE END Includes */
 

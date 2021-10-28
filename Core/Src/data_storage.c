@@ -7,6 +7,12 @@
 
 #include "data_storage.h"
 
+static uint8_t echoBuffer[12] = { 0 };
+
+uint8_t* GetRXBuffer()
+{
+	return echoBuffer;
+}
 
 void DataStorage_Init()
 {
