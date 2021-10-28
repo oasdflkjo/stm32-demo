@@ -13,7 +13,7 @@
  * @brief
  *
  */
-void App_Init();
+int App_Init();
 
 /**
  * @brief

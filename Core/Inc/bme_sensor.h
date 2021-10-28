@@ -13,6 +13,8 @@
 #include <stdint.h>
 
 
+extern struct bme280_dev bme280_device;
+
 int BME_Init();
 struct bme280_dev* BME_Get_Sensor();
 

@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-void App_Init()
+int App_Init()
 {
 	int rslt;
 
@@ -26,24 +26,27 @@ void App_Init()
 	rslt = BME_Init();
 
 	Display_Init();
+
+	return rslt;
 }
 
-static char buffer[33];
 
 int App_Task()
 {
+	char buffer[33];
 	struct bme280_data sensor_data;
 	BME_GetData(BME280_ALL, &sensor_data);
 
 	// sensor_data.temperature = 1;
-	snprintf(buffer, 32, "%f", sensor_data.temperature);
+	snprintf(buffer, 32, "%0.2f", sensor_data.temperature);
+			// sensor_data.pressure, sensor_data.humidity);
 
 	LCD_Clear();
 	LCD_Set_Cursor(1, 1);
-	LCD_Write_String("Hello, World");
+	LCD_Write_String("Temperature");
 	LCD_Set_Cursor(2, 1);
 	LCD_Write_String(buffer);
-	HAL_Delay(1000);
+	HAL_Delay(10000);
 
 	// Display_Update();
 	return 0;
