@@ -93,8 +93,6 @@ int main(void)
 
   App_Init();
 
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */

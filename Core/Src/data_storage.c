@@ -8,8 +8,17 @@
 #include "data_storage.h"
 
 static uint8_t echoBuffer[12] = { 0 };
+static uint8_t displayBuffer[33] = { 0 };
 
-uint8_t* GetRXBuffer()
+
+void DataStorage_AppendBuffer(const char* str)
+{
+
+}
+
+
+
+uint8_t* GetRxBuffer()
 {
 	return echoBuffer;
 }
@@ -27,5 +36,7 @@ void DataStorage_Read()
 {
 
 }
+
+
 
 

@@ -118,8 +118,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
-	HAL_UART_Transmit(huart, GetRXBuffer(), 2, 100);
-	HAL_UART_Receive_IT(huart, GetRXBuffer(), 2);
+	HAL_UART_Transmit(huart, GetRxBuffer(), 2, 100);
+	HAL_UART_Receive_IT(huart, GetRxBuffer(), 2);
 }
 
 /* USER CODE END 1 */

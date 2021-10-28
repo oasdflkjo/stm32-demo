@@ -11,7 +11,9 @@
 #include <stdint.h>
 
 
-uint8_t* GetRXBuffer();
+uint8_t* GetRxBuffer();
+
+void DataStorage_AppendBuffer(const char* str);
 
 void DataStorage_Init();
 
