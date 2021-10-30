@@ -48,6 +48,11 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32L1xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../Core/Lib/BSP/"/>
+									<listOptionValue builtIn="false" value="../Core/Lib/uC-CPU"/>
+									<listOptionValue builtIn="false" value="../Core/Lib/uC-LIB"/>
+									<listOptionValue builtIn="false" value="../Core/Lib/uC-OS3"/>
+									<listOptionValue builtIn="false" value="../Core/Lib/cfg"/>
+									<listOptionValue builtIn="false" value="../Core/Lib/L152RE"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.2084085802" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>

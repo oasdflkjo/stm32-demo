@@ -15,6 +15,8 @@
 
 #include "DWT_Delay.h"
 
+#include <os.h>
+
 //-----[ Alphanumeric LCD 16x2 Routines ]-----
 
 void LCD_DATA(unsigned char Data)
@@ -77,45 +79,7 @@ void LCD_Set_Cursor(unsigned char r, unsigned char c)
 }
 void LCD_Init()
 {
-//	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	// Initialize The DWT Delay Function Which Will Be Used Later On
 	DWT_Delay_Init();
-    // IO Pin Configurations
-//	if(LCD16x2_CfgParam.LCD_GPIOA == GPIOA)
-//	    __HAL_RCC_GPIOA_CLK_ENABLE();
-//	else if(LCD16x2_CfgParam.LCD_GPIOB == GPIOB)
-//	    __HAL_RCC_GPIOB_CLK_ENABLE();
-//	else if(LCD16x2_CfgParam.LCD_GPIOC == GPIOC)
-//		__HAL_RCC_GPIOC_CLK_ENABLE();
-//
-//	HAL_GPIO_WritePin(LCD16x2_CfgParam.LCD_GPIOA, LCD16x2_CfgParam.D4_PIN, GPIO_PIN_RESET);
-//	HAL_GPIO_WritePin(LCD16x2_CfgParam.LCD_GPIOA, LCD16x2_CfgParam.D5_PIN, GPIO_PIN_RESET);
-//	HAL_GPIO_WritePin(LCD16x2_CfgParam.LCD_GPIOC, LCD16x2_CfgParam.D6_PIN, GPIO_PIN_RESET);
-//	HAL_GPIO_WritePin(LCD16x2_CfgParam.LCD_GPIOB, LCD16x2_CfgParam.D7_PIN, GPIO_PIN_RESET);
-//	HAL_GPIO_WritePin(LCD16x2_CfgParam.LCD_GPIOB, LCD16x2_CfgParam.RS_PIN, GPIO_PIN_RESET);
-//	HAL_GPIO_WritePin(LCD16x2_CfgParam.LCD_GPIOB, LCD16x2_CfgParam.EN_PIN, GPIO_PIN_RESET);
-////	GPIO_InitStruct.Pin = LCD16x2_CfgParam.D4_PIN | LCD16x2_CfgParam.D5_PIN |
-////			LCD16x2_CfgParam.D6_PIN |LCD16x2_CfgParam.D7_PIN | LCD16x2_CfgParam.RS_PIN |
-////			LCD16x2_CfgParam.EN_PIN;
-//
-//	GPIO_InitStruct.Pin = LCD16x2_CfgParam.D4_PIN | LCD16x2_CfgParam.D5_PIN;
-//	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-//	GPIO_InitStruct.Pull = GPIO_NOPULL;
-//	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-//	HAL_GPIO_Init(LCD16x2_CfgParam.LCD_GPIOA, &GPIO_InitStruct);
-//
-//
-//	GPIO_InitStruct.Pin = LCD16x2_CfgParam.RS_PIN | LCD16x2_CfgParam.EN_PIN | LCD16x2_CfgParam.D7_PIN;
-//	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-//	GPIO_InitStruct.Pull = GPIO_NOPULL;
-//	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-//	HAL_GPIO_Init(LCD16x2_CfgParam.LCD_GPIOB, &GPIO_InitStruct);
-//
-//	GPIO_InitStruct.Pin = LCD16x2_CfgParam.D6_PIN;
-//	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-//	GPIO_InitStruct.Pull = GPIO_NOPULL;
-//	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-//	HAL_GPIO_Init(LCD16x2_CfgParam.LCD_GPIOC, &GPIO_InitStruct);
 
 	// The Init. Procedure As Described In The Datasheet
     HAL_GPIO_WritePin(LCD16x2_CfgParam.LCD_GPIOB, LCD16x2_CfgParam.RS_PIN, GPIO_PIN_RESET);

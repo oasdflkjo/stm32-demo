@@ -37,8 +37,8 @@ static void Configure_Device()
 	bme280_device.intf_ptr = &dev_addr; // BME280_I2C_ADDR_SEC
 	bme280_device.intf = BME280_I2C_INTF;
 }
-
-int8_t stream_sensor_data_normal_mode(struct bme280_dev *dev)
+//stream_sensor_data_normal_mode
+static int8_t Set_Sensor_NormalMode(struct bme280_dev *dev)
 {
 	int8_t rslt;
 	uint8_t settings_sel;
@@ -64,7 +64,7 @@ int8_t stream_sensor_data_normal_mode(struct bme280_dev *dev)
 
 static int8_t Set_Device_Operational(struct bme280_dev* device)
 {
-	return stream_sensor_data_normal_mode(device);
+	return Set_Sensor_NormalMode(device);
 }
 
 struct bme280_dev* BME_Get_Sensor()

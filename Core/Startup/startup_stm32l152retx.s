@@ -141,8 +141,8 @@ g_pfnVectors:
   .word SVC_Handler
   .word DebugMon_Handler
   .word 0
-  .word PendSV_Handler
-  .word SysTick_Handler
+  .word OS_CPU_PendSVHandler
+  .word OS_CPU_SysTickHandler
   .word WWDG_IRQHandler
   .word PVD_IRQHandler
   .word TAMPER_STAMP_IRQHandler
@@ -237,11 +237,11 @@ g_pfnVectors:
   .weak DebugMon_Handler
   .thumb_set DebugMon_Handler,Default_Handler
 
-  .weak PendSV_Handler
-  .thumb_set PendSV_Handler,Default_Handler
+  .weak OS_CPU_PendSVHandler
+  .thumb_set PendSVHandler,Default_Handler
 
-  .weak SysTick_Handler
-  .thumb_set SysTick_Handler,Default_Handler
+  .weak OS_CPU_SysTickHandler
+  .thumb_set SysTickHandler,Default_Handler
 
   .weak WWDG_IRQHandler
   .thumb_set WWDG_IRQHandler,Default_Handler
@@ -407,6 +407,18 @@ g_pfnVectors:
 
   .weak COMP_ACQ_IRQHandler
    .thumb_set COMP_ACQ_IRQHandler,Default_Handler
+
+.thumb_func
+PendSV_Handler:
+	b OS_CPU_PendSVHandler
+	b .
+
+.thumb_func
+SysTick_Handler:
+	b OS_CPU_SysTickHandler
+	b .
+
+
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
