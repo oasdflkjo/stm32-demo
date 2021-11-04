@@ -8,6 +8,11 @@
 #ifndef INC_APP_H_
 #define INC_APP_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "main.h"
 
 /**
  * @brief
@@ -22,5 +27,9 @@ int App_Init();
  */
 int App_Task();
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* INC_APP_H_ */

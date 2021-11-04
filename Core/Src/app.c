@@ -11,8 +11,7 @@
 
 #include "sensor_datatype.h"
 
-#include "usart.h"
-#include "stm32l1xx_hal_uart.h"
+#include "main.h"
 
 #include "lcd16x2/LCD16x2.h"
 
