@@ -28,6 +28,10 @@ typedef struct {
 	DataStorageType* tail;
 } DataStorageTypeList;
 
+// this is here for the LCD to fetch right string for the sensor type
+// maximum amount of characters per line is 16 + \n
+
+
 
 
 uint8_t* GetRxBuffer();

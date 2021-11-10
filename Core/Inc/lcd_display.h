@@ -19,9 +19,16 @@ void Display_Init();
 
 /**
  * @brief
+ *	builds or querys right string for the lcd
+ */
+static void Update_Buffer();
+
+/**
+ * @brief
  *
  */
-void Display_Update();
+
+void Display_Draw();
 
 /**
  * @brief

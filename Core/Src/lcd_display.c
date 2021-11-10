@@ -7,14 +7,27 @@
 
 #include "lcd_display.h"
 
+#include <string.h>
 #include "data_storage.h"
 
 #include <lcd16x2/LCD16x2.h>
 #include <sensor_datatype.h>
+#include <stdio.h>
+
+#define MAX_LCD_BUFFER_SIZE 34
+
+/*TypeDisplayInfo gTypeDisplayInfo[] =
+{
+    { "BME 280 Temp \n %0.2f C", SENSOR_TYPE_TEMP },
+    { "BME 280 Hum \n %0.2f %%", SENSOR_TYPE_HUMD },
+    { "BME 280 Pres \n %0.2f Pa", SENSOR_TYPE_PRESS },
+};*/
 
 
 static SensorDataType g_display_mode = 0;
 static uint8_t g_is_updating = 0;
+static char lcd_buffer[MAX_LCD_BUFFER_SIZE];
+
 
 
 typedef struct {
@@ -22,15 +35,8 @@ typedef struct {
     SensorDataType type;
 } TypeDisplayInfo;
 
-TypeDisplayInfo gTypeDisplayInfo[] =
-{
-    { "Temperature \n %0.2f C", SENSOR_TYPE_TEMP },
-    { "Humidity \n %0.2f %%", SENSOR_TYPE_HUMD },
-    { "Pressure \n %0.2f Pa", SENSOR_TYPE_PRESS },
-};
 
-
-static TypeDisplayInfo* Get_DisplayInfo(SensorDataType datatype)
+/*static TypeDisplayInfo* Get_DisplayInfo(SensorDataType datatype)
 {
     TypeDisplayInfo* display = gTypeDisplayInfo;
     while (display++ != NULL)
@@ -42,20 +48,46 @@ static TypeDisplayInfo* Get_DisplayInfo(SensorDataType datatype)
     }
 
     return NULL;
-}
-
-
+}*/
 
 void Display_Init()
 {
-    // g_display_mode = DISPLAY_SENSOR_TEMP;
-
     LCD_Init();
 }
 
-void Display_Update()
+static void Update_Buffer()
 {
+	// TODO
+	// get current mode
+	// get value with that mode
+	// get string with that mode from lookup table
+	// float dummy_temperature = 24.4;
+	// char dummy_string[] = "BME 280 Temp \n %0.2f C";
+	// some reason i do not understand why is this not working with variables
+	snprintf(lcd_buffer, MAX_LCD_BUFFER_SIZE, "hello from \nupdate_buffer");
+}
 
+void Display_Draw()
+{
+ 	Update_Buffer();
+    if (strlen(lcd_buffer) <= 33)
+    {
+        LCD_Clear();
+        LCD_Set_Cursor(1, 1);
+        char *p = lcd_buffer;
+        while (*p != '\0')
+        {
+            if (*p == '\n')
+            {
+                LCD_Set_Cursor(2, 1);
+            }
+            else
+            {
+                LCD_Write_Char(*p);
+            }
+            p++;
+        }
+    }
 }
 
 void Display_SetMode(SensorDataType mode)
