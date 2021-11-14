@@ -16,12 +16,13 @@
 
 #define MAX_LCD_BUFFER_SIZE 34
 
-TypeDisplayInfo gTypeDisplayInfo[] =
+/*TypeDisplayInfo gTypeDisplayInfo[] =
 {
     { "BME 280 Temp \n %0.2f C", SENSOR_TYPE_TEMP },
     { "BME 280 Hum \n %0.2f %%", SENSOR_TYPE_HUMD },
     { "BME 280 Pres \n %0.2f Pa", SENSOR_TYPE_PRESS },
 };
+*/
 
 
 static SensorDataType g_display_mode = 0;
