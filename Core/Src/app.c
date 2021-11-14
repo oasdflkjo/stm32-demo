@@ -30,17 +30,8 @@ static void Update_Sensors()
 
 int App_Init()
 {
-	int rslt;
-
-	// Initialize the RX Interrupt.
-	// HAL_UART_Receive_IT(&huart2, GetRXBuffer(), 2);
-
-	//DataStorage_Init();
-	//rslt = BME_Init();
-
 	Display_Init();
-
-	return rslt;
+	return 0;
 }
 
 
@@ -48,7 +39,7 @@ int App_Task()
 {
 	OS_ERR p_err;
 	Display_Draw();
-	OSTimeDlyHMSM(0, 0, 10, 0, OS_OPT_TIME_HMSM_STRICT, &p_err);
+	OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &p_err);
 	return 0;
 }
 
