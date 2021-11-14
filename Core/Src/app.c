@@ -35,8 +35,8 @@ int App_Init()
 	// Initialize the RX Interrupt.
 	// HAL_UART_Receive_IT(&huart2, GetRXBuffer(), 2);
 
-	DataStorage_Init();
-	rslt = BME_Init();
+	//DataStorage_Init();
+	//rslt = BME_Init();
 
 	Display_Init();
 

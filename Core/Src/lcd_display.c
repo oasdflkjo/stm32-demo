@@ -16,19 +16,20 @@
 
 #define MAX_LCD_BUFFER_SIZE 34
 
-/*TypeDisplayInfo gTypeDisplayInfo[] =
+TypeDisplayInfo gTypeDisplayInfo[] =
 {
     { "BME 280 Temp \n %0.2f C", SENSOR_TYPE_TEMP },
     { "BME 280 Hum \n %0.2f %%", SENSOR_TYPE_HUMD },
     { "BME 280 Pres \n %0.2f Pa", SENSOR_TYPE_PRESS },
-};*/
+};
 
 
 static SensorDataType g_display_mode = 0;
 static uint8_t g_is_updating = 0;
 static char lcd_buffer[MAX_LCD_BUFFER_SIZE];
 
-
+static float dummy_temperature = 24.432;
+static char dummy_string[] = "BME 280 Temp \n%0.2f C";
 
 typedef struct {
     const char *text;
@@ -58,13 +59,11 @@ void Display_Init()
 static void Update_Buffer()
 {
 	// TODO
-	// get current mode
-	// get value with that mode
-	// get string with that mode from lookup table
-	// float dummy_temperature = 24.4;
-	// char dummy_string[] = "BME 280 Temp \n %0.2f C";
+	// 1. get current mode from button.c
+	// 2. get value with that mode from data_storage.c
+	// 3. get string with that mode from lookup table
 	// some reason i do not understand why is this not working with variables
-	snprintf(lcd_buffer, MAX_LCD_BUFFER_SIZE, "hello from \nupdate_buffer");
+	snprintf(lcd_buffer, MAX_LCD_BUFFER_SIZE, dummy_string, dummy_temperature);
 }
 
 void Display_Draw()
