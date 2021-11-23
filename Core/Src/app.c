@@ -19,7 +19,7 @@
 
 #include <stdio.h>
 
-
+/*
 static void Update_Sensors()
 {
 	struct bme280_data sensor_data;
@@ -27,6 +27,7 @@ static void Update_Sensors()
 
 	DataStorage_AppendBuffer(&sensor_data, SENSOR_TYPE_ALL);
 }
+*/
 
 int App_Init()
 {

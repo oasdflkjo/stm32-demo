@@ -16,7 +16,7 @@
 #include <sensor_datatype.h>
 #include <stdio.h>
 
-#define MAX_LCD_BUFFER_SIZE 34
+#define LCD_BUFFER_SIZE 34
 
 /*TypeDisplayInfo gTypeDisplayInfo[] =
  {
@@ -28,8 +28,8 @@
 
 static SensorDataType g_display_mode = 0;
 static uint8_t g_is_updating = 0;
-static char lcd_buffer[MAX_LCD_BUFFER_SIZE];
-static char lcd_current[MAX_LCD_BUFFER_SIZE];
+static char lcd_buffer[LCD_BUFFER_SIZE];
+static char lcd_current[LCD_BUFFER_SIZE];
 
 //static uint8_t dummy_temperature = 0;
 //static char dummy_string[] = "counter :%d";
@@ -57,38 +57,40 @@ void Display_Init() {
 	LCD_Init();
 }
 
-static void Update_Buffer() {
-	// TODO
-	// 1. get current mode from button.c
-	// 2. get value with that mode from data_storage.c
-	// 3. get string with that mode from lookup table
-	// some reason i do not understand why is this not working with variables
-	snprintf(lcd_buffer, MAX_LCD_BUFFER_SIZE, "hello\nflicker");
+void Update_Buffer() {
+	snprintf(lcd_buffer, LCD_BUFFER_SIZE, "still\nworking");
+}
+
+void Render_Buffer_to_LCD() {
+	LCD_Clear();
+	LCD_Set_Cursor(1, 1);
+	char *p = lcd_buffer;
+	while (*p != '\0') {
+		if (*p == '\n') {
+			LCD_Set_Cursor(2, 1);
+		} else {
+			LCD_Write_Char(*p);
+		}
+		p++;
+	}
 }
 
 void Display_Draw() {
-	// why this delay makes program run without breakpoints?
 	OS_ERR err;
+	// I don't have any clue why this delay is needed.
+	// I encountered a problem that the project gave random outputs
+	// to the screen while running without breakpoints in debug. So I
+	// had to manually insert dummy "breakpoint"
 	OSTimeDly(200, OS_OPT_TIME_DLY, &err);
-	//
 	Update_Buffer();
-	if (memcmp(lcd_current, lcd_buffer, MAX_LCD_BUFFER_SIZE * sizeof(char))!=0) {
-		if (strlen(lcd_buffer) <= 33) {
-			LCD_Clear();
-			LCD_Set_Cursor(1, 1);
-			char *p = lcd_buffer;
-			while (*p != '\0') {
-				if (*p == '\n') {
-					LCD_Set_Cursor(2, 1);
-				} else {
-					LCD_Write_Char(*p);
-				}
-				p++;
-			}
-		}
-	memcpy(lcd_current, lcd_buffer, MAX_LCD_BUFFER_SIZE * sizeof(char));
+	// Currently expects that the buffer is correctly structured
+	if (memcmp(lcd_current, lcd_buffer, LCD_BUFFER_SIZE * sizeof(char)) != 0) {
+		Render_Buffer_to_LCD();
+		memcpy(lcd_current, lcd_buffer, LCD_BUFFER_SIZE * sizeof(char));
 	}
 }
+
+
 
 void Display_SetMode(SensorDataType mode) {
 	g_display_mode = mode;
