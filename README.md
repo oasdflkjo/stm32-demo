@@ -3,8 +3,9 @@
 This is a school project *(scrum)* that is organized with Azure DevOps. It's a UCOS3 project.
 
 **Key Functionality**
-- MODBUS slave and master modules
+- Different functionalities run in separate RTOS tasks
 
+- MODBUS slave and master modules
 - Sensor reading with slave modules
 - Showing readings on master module
 - Push button functionality to show different readings

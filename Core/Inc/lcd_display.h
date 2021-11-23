@@ -22,11 +22,11 @@ void Display_Init();
  * @brief Updates lcd_buffer[] from data storage
  *
  * TODO: 1. get current mode from button.c
- *	     2. get value with that mode from data_storage.c
- *	     3. get string with that mode from lookup table
- *	     some reason i do not understand why is this not working with variables
+ *       2. get value with that mode from data_storage.c
+ *       3. get string with that mode from lookup table
+ *       some reason i do not understand why is this not working with variables
  *
- *	     why CubeIDE gives warnings when declaring
+ *       why CubeIDE gives warnings when declaring
  *       this function as a static?
  */
 void Update_Buffer();
