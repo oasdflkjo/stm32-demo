@@ -1,4 +1,5 @@
 # stm32-demo
+![title](.pics\readme.jpg)
 This is a school project *(scrum)* that is organized with Azure DevOps. It's a UCOS3 project.
 
 **Key Functionality**
