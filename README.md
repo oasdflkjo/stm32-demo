@@ -30,7 +30,7 @@ that was easy to modify to our needs.
 ---
 My code LCD code can mainly be found in
 
-- [Core/Inc/lcd_display.h](Core/Src/lcd_display.h)
+- [Core/Inc/lcd_display.h](Core/Inc/lcd_display.h)
 - [Core/Src/lcd_display.c](Core/Src/lcd_display.c)
 
 It was also my responsibility to make UCOS3 task to update the lcd screen.
