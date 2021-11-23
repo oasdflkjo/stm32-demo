@@ -3,6 +3,7 @@
  *
  *  Created on: Oct 28, 2021
  *      Author: Velho
+ *      Edited: Petri Pihla
  */
 
 #include "lcd_display.h"
@@ -18,13 +19,9 @@
 
 #define LCD_BUFFER_SIZE 34
 
-/*TypeDisplayInfo gTypeDisplayInfo[] =
- {
- { "BME 280 Temp \n %0.2f C", SENSOR_TYPE_TEMP },
- { "BME 280 Hum \n %0.2f %%", SENSOR_TYPE_HUMD },
- { "BME 280 Pres \n %0.2f Pa", SENSOR_TYPE_PRESS },
- };
- */
+/*TypeDisplayInfo gTypeDisplayInfo[] = { { "BME 280 Temp \n %0.2f C",
+		SENSOR_TYPE_TEMP }, { "BME 280 Hum \n %0.2f %%", SENSOR_TYPE_HUMD }, {
+		"BME 280 Pres \n %0.2f Pa", SENSOR_TYPE_PRESS } };*/
 
 static SensorDataType g_display_mode = 0;
 static uint8_t g_is_updating = 0;
@@ -39,19 +36,17 @@ typedef struct {
 	SensorDataType type;
 } TypeDisplayInfo;
 
-/*static TypeDisplayInfo* Get_DisplayInfo(SensorDataType datatype)
- {
- TypeDisplayInfo* display = gTypeDisplayInfo;
- while (display++ != NULL)
- {
- if (display->type == datatype)
- {
+/*
+ static TypeDisplayInfo* Get_DisplayInfo(SensorDataType datatype) {
+ TypeDisplayInfo *display = gTypeDisplayInfo;
+ while (display++ != NULL) {
+ if (display->type == datatype) {
  return display;
  }
  }
-
  return NULL;
- }*/
+ }
+ */
 
 void Display_Init() {
 	LCD_Init();
@@ -89,8 +84,6 @@ void Display_Draw() {
 		memcpy(lcd_current, lcd_buffer, LCD_BUFFER_SIZE * sizeof(char));
 	}
 }
-
-
 
 void Display_SetMode(SensorDataType mode) {
 	g_display_mode = mode;

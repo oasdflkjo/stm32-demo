@@ -3,6 +3,7 @@
  *
  *  Created on: Oct 27, 2021
  *      Author: Velho
+ *      Edited: Petri Pihla
  */
 
 #ifndef INC_LCD_DISPLAY_H_
@@ -55,15 +56,16 @@ void Render_Buffer_to_LCD();
  */
 void Display_Draw();
 
-
-
 /**
  * @brief
  *
  */
 void Display_SetMode(SensorDataType mode);
 
+/**
+ * @brief
+ *
+ */
 uint8_t Display_IsUpdating();
-
 
 #endif /* INC_LCD_DISPLAY_H_ */
